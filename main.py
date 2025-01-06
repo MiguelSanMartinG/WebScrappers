@@ -1,3 +1,4 @@
+from entities import Producto
 from origins import UnderArmourScanner
 import psycopg2
 
@@ -51,7 +52,6 @@ def guardar_producto(producto):
     finally:
         cursor.close()
 
-
 def generar_consulta(lista):
     cursor = conexion.cursor()
     try:
@@ -71,14 +71,17 @@ def generar_consulta(lista):
     finally:
         cursor.close()
 
-def hacer_historico_producto(id_consulta,id_producto):
+def hacer_historico_producto(id_consulta,id_producto, item:Producto):
     cursor = conexion.cursor()
     try:
+        precio= item.get_precio()
+        descuento= item.get_descuento()
+        precio_descuento = item.get_precio_desc()
         consulta = """
-        INSERT INTO historicos_productos (id_producto, id_consulta) 
-        VALUES (%s, %s) RETURNING id_historico; 
+        INSERT INTO historicos_productos (id_producto, id_consulta, precio_original,precio_descuento, descuento) 
+        VALUES (%s, %s, %s, %s, %s) RETURNING id_historico; 
         """
-        cursor.execute(consulta, (id_producto, id_consulta))
+        cursor.execute(consulta, (id_producto, id_consulta,precio, precio_descuento, descuento))
         id_historico = cursor.fetchone()
         conexion.commit()
         print("Historico guardado correctamente. " +str(id_historico[0]))
@@ -90,7 +93,7 @@ def hacer_historico_producto(id_consulta,id_producto):
         cursor.close()
 
 
-lista = UnderArmourScanner.getProducts('hombre', '/tenis/beisbol/')
+lista = UnderArmourScanner.getProducts('hombre', '/tenis/running/')
 
 id_consulta = generar_consulta(lista)
 
@@ -99,9 +102,9 @@ print(id_consulta)
 lista = lista[2:]
 
 for item in lista:
-    # print(item)
+    print(item)
     id_producto = guardar_producto(item)
-    id_historico = hacer_historico_producto(id_consulta,id_producto)
+    id_historico = hacer_historico_producto(id_consulta,id_producto,item)
     print(id_historico)
 
 conexion.close()

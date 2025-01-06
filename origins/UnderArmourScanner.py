@@ -20,6 +20,7 @@ def clean(texto):
 def calcularResultados(sexo, categoria):
     URL_CONSULTA='https://www.underarmour.com.mx/es-mx/c/'+sexo+'/'+categoria+'/?page=1&sz=1'
     print('Buscando numero de productos para: '+categoria)
+    busqueda = requests.get(URL_CONSULTA)
     resultados = BeautifulSoup(requests.get(URL_CONSULTA).content, 'html.parser').find('div',class_='b-plp_header-results_count').get('data-analytics-plp-count')
     print('Se encontro: '+ resultados.strip() +' resultados')
     return resultados.strip()
