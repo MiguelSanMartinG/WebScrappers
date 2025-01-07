@@ -92,19 +92,38 @@ def hacer_historico_producto(id_consulta,id_producto, item:Producto):
     finally:
         cursor.close()
 
+def comenzar_consulta(sexo, categoria):
+    lista = UnderArmourScanner.getProducts('hombre', '/tenis/running/')
+    id_consulta = generar_consulta(lista)
+    print(id_consulta)
+    lista = lista[2:]
+    for item in lista:
+        print(item)
+        id_producto = guardar_producto(item)
+        id_historico = hacer_historico_producto(id_consulta, id_producto, item)
+        print(id_historico)
 
-lista = UnderArmourScanner.getProducts('hombre', '/tenis/running/')
 
-id_consulta = generar_consulta(lista)
 
-print(id_consulta)
+# lista = UnderArmourScanner.getProducts('hombre', '/tenis/running/')
+
+# id_consulta = generar_consulta(lista)
+
+# print(id_consulta)
 # Eliminamos los 2 lugares de la lista
-lista = lista[2:]
+# lista = lista[2:]
 
-for item in lista:
-    print(item)
-    id_producto = guardar_producto(item)
-    id_historico = hacer_historico_producto(id_consulta,id_producto,item)
-    print(id_historico)
+# for item in lista:
+#     print(item)
+#     id_producto = guardar_producto(item)
+#     id_historico = hacer_historico_producto(id_consulta,id_producto,item)
+#     print(id_historico)
+comenzar_consulta('hombres', '/tenis/baselayer/')
+comenzar_consulta('hombre', '/ropa/ropa-de-abrigo/')
+comenzar_consulta('hombre', '/pants-y-leggings/')
+comenzar_consulta('hombre', '/ropa/sudaderas-con-y-sin-capucha/')
+comenzar_consulta('hombre', '/ropa/sin-mangas/')
+comenzar_consulta('mens', '/clothing/performance-shirts/')
+
 
 conexion.close()
