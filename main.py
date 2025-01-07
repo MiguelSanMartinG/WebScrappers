@@ -36,10 +36,11 @@ def guardar_producto(producto):
         else:
             # Insertar el producto si no existe
             insertar_producto = """
-             INSERT INTO productos (nombre, tipo)
-             VALUES (%s, %s) RETURNING id_producto;
+             INSERT INTO productos (nombre, tipo, enlace, imagen)
+             VALUES (%s, %s, %s, %s) RETURNING id_producto;
              """
-            cursor.execute(insertar_producto, (producto.get_titulo(), producto.get_tipo()))
+
+            cursor.execute(insertar_producto, (producto.get_titulo(), producto.get_tipo(), producto.get_enlace(), producto.imagen))
             id = cursor.fetchone()
             conexion.commit()
             print("Producto guardado correctamente.")
@@ -47,7 +48,7 @@ def guardar_producto(producto):
             return id[0]
 
     except Exception as e:
-        print("Error en la consulta: ", e)
+        print("Error en la consulta: linea 50 main", e)
         conexion.rollback()
     finally:
         cursor.close()
@@ -93,7 +94,7 @@ def hacer_historico_producto(id_consulta,id_producto, item:Producto):
         cursor.close()
 
 def comenzar_consulta(sexo, categoria):
-    lista = UnderArmourScanner.getProducts('hombre', '/tenis/running/')
+    lista = UnderArmourScanner.getProducts(sexo, categoria)
     id_consulta = generar_consulta(lista)
     print(id_consulta)
     lista = lista[2:]
@@ -118,12 +119,17 @@ def comenzar_consulta(sexo, categoria):
 #     id_producto = guardar_producto(item)
 #     id_historico = hacer_historico_producto(id_consulta,id_producto,item)
 #     print(id_historico)
-comenzar_consulta('hombres', '/tenis/baselayer/')
+comenzar_consulta('hombres', '/baselayer/')
 comenzar_consulta('hombre', '/ropa/ropa-de-abrigo/')
 comenzar_consulta('hombre', '/pants-y-leggings/')
 comenzar_consulta('hombre', '/ropa/sudaderas-con-y-sin-capucha/')
 comenzar_consulta('hombre', '/ropa/sin-mangas/')
 comenzar_consulta('mens', '/clothing/performance-shirts/')
+comenzar_consulta('hombre', '/tenis/sandalias-chanclas/')
+comenzar_consulta('hombre', '/ropa/manga-larga/')
+comenzar_consulta('outlet', '/hombre/pants/')
+comenzar_consulta('outlet', '/hombre/accesorios/')
+comenzar_consulta('hombre', '/ropa/tops/')
 
 
 conexion.close()

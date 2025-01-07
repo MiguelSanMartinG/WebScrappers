@@ -46,7 +46,7 @@ def getProducts(sexo, categoria):
         producto_obj = Producto()
         titulo = producto.find('a', class_='b-tile-name')
         producto_obj.set_titulo(clean(titulo.text).strip())
-        producto_obj.set_enlace(producto.find('a', class_='b-tile-name').get('href'))
+        producto_obj.set_enlace('https://www.underarmour.com.mx'+producto.find('a', class_='b-tile-name').get('href'))
         # print(producto)
 
         producto_obj.imagen = producto.find('img').get('data-src')

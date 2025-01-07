@@ -32,5 +32,5 @@ select count(*) from productos where nombre = 'Camiseta de manga corta de compre
 select * from historicos_productos hp 
 join consultas c on hp.id_consulta = c.id_consulta 
 join productos p on hp.id_producto = p.id_producto 
-where hp.precio_descuento < 400
-order by hp.descuento desc
+where hp.descuento > 35 
+order by hp.precio_descuento asc
