@@ -3,15 +3,36 @@ from tkinter import Image
 
 class Producto:
     
-    def __init__(self, titulo=None, tipo=None, precio=None, precio_max=None, precio_desc=None, enlace=None, descuento=None):
-        self._imagen = None
-        self._titulo = titulo
-        self._tipo = tipo
+    def __init__(self, titulo=None, tipo=None, precio=None, precio_max=None, precio_desc=None, enlace=None, descuento=None, categoria=None,
+                  sku=None, imagen=None):
+        # Historico
         self._precio = precio
         self._precio_max = precio_max
         self._precio_desc = precio_desc
-        self._enlace = enlace
+        self._tipo = tipo
         self._descuento = descuento
+        # Producto
+        self._titulo = titulo
+        self._imagen = imagen
+        self._enlace = enlace
+        self._categoria = categoria
+        self._sku = sku
+
+    @property
+    def categoria(self):
+        return self._categoria
+    
+    @categoria.setter
+    def categoria(self, value):
+        self._categoria = value
+    
+    @property
+    def sku(self):
+        return self._sku 
+    
+    @sku.setter
+    def sku(self, value):
+        self._sku = value
 
     @property
     def imagen(self):
@@ -35,14 +56,12 @@ class Producto:
     # Getter y Setter para 'titulo'
     def get_titulo(self):
         return self._titulo
-
     def set_titulo(self, titulo):
         self._titulo = titulo
 
     # Getter y Setter para 'tipo'
     def get_tipo(self):
         return self._tipo
-
     def set_tipo(self, tipo):
         self._tipo = tipo
 
@@ -68,4 +87,6 @@ class Producto:
         self._precio_desc = precio_desc
 
     def __repr__(self):
-        return f"Producto(titulo='{self._titulo}', tipo='{self._tipo}', precio={self._precio}, precio_max={self._precio_max}, precio_desc={self._precio_desc}, enlace='{self._enlace}, descuento={self._descuento}, imagen={self._imagen})')"
+        return (f"Producto(titulo='{self._titulo}', tipo='{self._tipo}', "
+                f"precio={self._precio}, precio_max={self._precio_max}, precio_desc={self._precio_desc}, "
+                f"enlace='{self._enlace}, descuento={self._descuento}, imagen={self._imagen} , sku={self._sku}, categoria={self._categoria}, )')")

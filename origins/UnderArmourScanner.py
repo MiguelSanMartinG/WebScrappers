@@ -33,7 +33,7 @@ def sacarDescuento(precio_original, precio_descuento):
 def getProducts(sexo, categoria):
 
     resultados = calcularResultados(sexo, categoria)
-    URL_BASE = 'https://www.underarmour.com.mx/es-mx/c/' + sexo + categoria + '/?page=1&sz=' + resultados
+    URL_BASE = 'https://www.underarmour.com.mx/es-mx/c/' + sexo +'/'+ categoria + '/?page=1&sz=' + resultados
     print('Trayendo datos...')
     pedido_obtenido = requests.get(URL_BASE).text
     # print(pedido_obtenido.status_code) <- ESTADO
@@ -47,6 +47,9 @@ def getProducts(sexo, categoria):
         titulo = producto.find('a', class_='b-tile-name')
         producto_obj.set_titulo(clean(titulo.text).strip())
         producto_obj.set_enlace('https://www.underarmour.com.mx'+producto.find('a', class_='b-tile-name').get('href'))
+        producto_obj.sku = producto.find('button', class_='b-tile-fav_defultButton wishlistTile product').get('data-analytics-sku')
+        print(producto_obj.sku)
+        producto_obj.categoria = categoria
         # print(producto)
 
         producto_obj.imagen = producto.find('img').get('data-src')

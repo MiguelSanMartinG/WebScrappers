@@ -32,5 +32,6 @@ select count(*) from productos where nombre = 'Camiseta de manga corta de compre
 select * from historicos_productos hp 
 join consultas c on hp.id_consulta = c.id_consulta 
 join productos p on hp.id_producto = p.id_producto 
-where hp.descuento > 35 
+-- where hp.descuento > 35 and c.fecha_consulta = '2025-01-07'
+where p.nombre = 'Playera sin mangas HeatGear® Armour para hombre'
 order by hp.precio_descuento asc
