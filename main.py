@@ -8,8 +8,8 @@ conexion = psycopg2.connect(
     host="localhost",
     port="5432",# Dirección del servidor
     database="scrapp",     # Nombre de la base de datos
-    user="postgres",      # Usuario de PostgreSQL
-    password="mysecretpassword"  # Contraseña del usuario
+    user="admin",      # Usuario de PostgreSQL
+    password="porygon1!"  # Contraseña del usuario
 )
 
 
@@ -137,10 +137,17 @@ def comenzar_consulta(sexo, categoria):
 # comenzar_consulta('hombre', 'tenis/sandalias-chanclas')
 # comenzar_consulta('hombre', 'ropa/manga-larga')
 # comenzar_consulta('hombre', 'ropa/tops')
-comenzar_consulta('hombres', 'baselayer')
+# comenzar_consulta('hombres', 'baselayer')
 # comenzar_consulta('outlet','/hombre/accesorios/')
 # comenzar_consulta('outlet','/hombre/pants/')
 # comenzar_consulta('mens','/clothing/performance-shirts/')
+# comenzar_consulta('hombre','ropa/shorts')
+# comenzar_consulta('hot-sale','descuento-calzado-hombres')
+# comenzar_consulta('hot-sale','descuento-ropa-hombre')
+# comenzar_consulta('hot-sale','descuento-accesorios')
+comenzar_consulta('dia-del-padre','ropa')
+comenzar_consulta('dia-del-padre','calzado')
+comenzar_consulta('accesorios','refrigeradores-botellas-de-agua')
 
 
 conexion.close()
