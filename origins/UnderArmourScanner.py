@@ -48,7 +48,7 @@ def getProducts(sexo, categoria):
         producto_obj.set_titulo(clean(titulo.text).strip())
         producto_obj.set_enlace('https://www.underarmour.com.mx'+producto.find('a', class_='b-tile-name').get('href'))
         producto_obj.sku = producto.find('button', class_='b-tile-fav_defultButton wishlistTile product').get('data-analytics-sku')
-        print(producto_obj.sku)
+        # print(producto_obj.sku)
         producto_obj.categoria = categoria
         # print(producto)
 
