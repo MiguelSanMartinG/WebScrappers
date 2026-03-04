@@ -1,4 +1,4 @@
-# 🕷️ WebScraper de Productos con Histórico de Precios (Python + PostgreSQL)
+#  WebScraper para UNDERARMOUR.COM (Python + PostgreSQL)
 
 Sistema de **web scraping automatizado** que consulta una tienda online UNDER ARMOUR, obtiene información de productos y almacena su histórico de precios en una base de datos PostgreSQL para analizar variaciones a lo largo del tiempo.
 
